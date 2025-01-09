@@ -162,7 +162,7 @@ public class CController {
     	
      ds.doAddPassword(ed);
      System.out.println("ddddddddddddd");
-     return "forward:/*"; 
+     return "rediect:*/"; 
     }
     
     
