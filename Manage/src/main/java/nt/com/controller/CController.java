@@ -2,8 +2,8 @@ package nt.com.controller;
 
 
 
-import java.util.Iterator;
-import java.util.List;
+
+
 import java.util.Map;
 
 import java.util.Optional;
@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import nt.com.bean.EmpDeatils;
 import nt.com.bean.LoginData;
@@ -30,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class CController {
 	String  token;
+	String gmail;
 	@Autowired
 	 ICrudRepository epo;
 	@Autowired
@@ -40,9 +39,13 @@ public class CController {
 	DoServices ds;
 	
 	EmpDeatils a;
-	@GetMapping("/")
+	@GetMapping("/home1")
 	public String homePage() {
 		return"home";
+	}
+	@GetMapping("/")
+	public String loginUser() {
+		return"loginemp";
 	}
 	@PostMapping("/comma")
 	public String checkLogin(@ModelAttribute LoginData c,Map<String,String> e) {
@@ -98,6 +101,69 @@ public class CController {
     	 scr.deleteById(num);
         return "forward:select";	 
      }
-	 
-	
+     @GetMapping("/edit")
+     public String doUpdate(@RequestParam int num,Map<String,EmpDeatils> m){
+    	Optional<EmpDeatils> op = edr.findById(num);
+    	EmpDeatils es = op.get();
+    	m.put("data", es);
+       return "edit"; 
+     } 
+    
+     @PostMapping("/update")
+  	public String doUpdate(@ModelAttribute EmpDeatils ed ,Map<String,EmpDeatils> m ) {
+    	 edr.save(ed);
+    	 m.put("data", ed);
+         return "dataUpdated";
+  	}
+    @PostMapping("/logincheck")
+ 	public String doCheckUser(@ModelAttribute EmpDeatils ed ,Map<String,EmpDeatils> m ) {
+    	Optional<EmpDeatils> op = ds.doCheckUser(ed);
+    	
+    	if(op.isPresent()){m.put("User",op.get()); return "userpage";}
+    	else {
+    		System.out.println(op.isPresent());
+    		return "error";
+ 	}
+    	
+    	
+   }
+    @GetMapping("/forgotpassword")
+    public String doReset(){
+   	
+      return "forgotpass"; 
+    }  
+    @PostMapping("/resetm")
+ 	public String doReset(@ModelAttribute EmpDeatils ed ,Map<String,String> m ) {
+           gmail=ed.getEmail();
+    	 String mess=  ds.doReset(gmail);
+    	   
+    	 if("sent".equals(mess)) 
+    	 { 
+    		 
+    		 m.put("str", "Check Your Gmail");	 
+    	  
+    	 }else {
+    		 m.put("str", "Please Enter Valid Email");
+    		 gmail=null;
+    		 
+    		 
+    	 }
+    	 return"forgotpass";
+ 	}
+    
+    @GetMapping("/resetpass")
+    public String doResetPass(Map<String,String> m){
+   	  m.put("email",gmail);
+      return "reset"; 
+    }
+    
+    @PostMapping("/addpass")
+    public String doAddPass(@ModelAttribute EmpDeatils ed ){
+    	
+     ds.doAddPassword(ed);
+     System.out.println("ddddddddddddd");
+     return "forward:/*"; 
+    }
+    
+    
 }

@@ -1,4 +1,6 @@
 package nt.com.bean;
+import java.time.LocalTime;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -22,5 +24,8 @@ public class EmpDeatils {
 	private String department;
 	private String email;
 	private long phone;
+	private LocalTime expiry_date;
+	private String pass;
 	private String status ="Active";
+	
 }

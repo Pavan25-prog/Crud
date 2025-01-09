@@ -68,7 +68,8 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+		
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
@@ -77,19 +78,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		
-	<!--	<dependency>
+		<dependency>
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-jasper</artifactId>
     <scope>provided</scope>
-</dependency>-->
+</dependency>
 <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/apache-jstl -->
-<dependency>
+<!--<dependency>
     <groupId>org.eclipse.jetty</groupId>
     <artifactId>apache-jstl</artifactId>
     <version>11.0.0</version>
-</dependency>
+</dependency>-->
 
 		<dependency>
 			<groupId>nit</groupId>

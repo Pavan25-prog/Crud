@@ -85,7 +85,7 @@
    ou.println("<td>"+ed.getEmail()+"</td>");
    ou.println("<td>"+ed.getPhone()+"</td>");
    ou.println("<td><a href='delete?num="+ed.getId()+"'><img src='images/delete.png' width='25' height='26'></a></td>");
-   ou.println("<td><a href='edit?'num="+ed.getId()+"><img src='images/edit.png' width='25' height='26'></a></td>");
+   ou.println("<td><a href='edit?num="+ed.getId()+"'><img src='images/edit.png' width='25' height='26'></a></td>");
    ou.println("</tr>");
   }
   ou.println("</table>");
